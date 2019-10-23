@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace donbidon\Core\Registry;
 
-use donbidon\Core\Registry\Middleware\Middleware;
 use RuntimeException;
 
 /**

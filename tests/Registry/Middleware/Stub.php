@@ -39,6 +39,7 @@ class Stub extends MiddlewareAbstract
      */
     protected function setScope(Registry $env): void
     {
+        $env;
         $this->registry->set('middleware', true);
     }
 }

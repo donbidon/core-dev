@@ -10,10 +10,10 @@ declare(strict_types=1);
 
 namespace donbidon\Core\Registry;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Exception as PHPUnitException;
-use RuntimeException;
 use donbidon\Core\Registry\Middleware\Stub;
+use PHPUnit\Framework\Exception as PHPUnitException;
+use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * Tree registry class unit tests.
@@ -210,6 +210,5 @@ class TreeTest extends TestCase
         );
         $this->registry->get('key_2/key_2_2');
         self::assertTrue($this->registry->exists('middleware'));
-
     }
 }

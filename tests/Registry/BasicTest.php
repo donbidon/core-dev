@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace donbidon\Core\Registry;
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Exception as PHPUnitException;
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 /**

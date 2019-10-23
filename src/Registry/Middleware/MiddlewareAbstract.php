@@ -29,7 +29,7 @@ abstract class MiddlewareAbstract implements Middleware
      */
     public function process(string $method, Registry $env): void
     {
-        $method = preg_replace("/^.+::/", "", $method);
+        $method = \preg_replace("/^.+::/", "", $method);
         if ($this->handle && \is_callable([$this, $method])) {
             \call_user_func([$this, $method], $env);
         }
