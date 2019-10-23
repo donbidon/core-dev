@@ -1,15 +1,13 @@
 language: php
-
-php:
-  - 7.2
-  - 7.3
+php: [ 7.2, 7.3 ]
+sudo: false
 
 install:
-  - travis_retry composer install --no-interaction --no-ansi --no-progress --no-suggest --prefer-source
+  - travis_retry composer install --no-interaction --prefer-dist --optimize-autoloader
 
 script:
-  - "vendor/bin/phpcs" --standard=./build/config/phpcs.ruleset.xml
-  - "vendor/bin/phpunit" -c ./build/config/phpunit.xml
+  - $HOME/vendor/bin/phpcs --standard=./build/config/phpcs.ruleset.xml
+  - $HOME/vendor/bin/phpunit -c ./build/config/phpunit.xml
 
 after_success:
   - cd build/output

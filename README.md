@@ -6,4 +6,3 @@
 [![GitHub issues](https://img.shields.io/github/issues-raw/donbidon/core-dev.svg)](https://github.com/donbidon/core-dev/issues)
 
 [![Donate to liberapay](http://img.shields.io/liberapay/receives/don.bidon.svg?logo=liberapay)](https://liberapay.com/don.bidon/donate)
-
