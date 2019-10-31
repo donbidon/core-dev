@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace donbidon\Core\Registry;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\Exception as PHPUnitException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -51,6 +52,17 @@ class BasicTest extends TestCase
         parent::setUp();
 
         $this->registry = new Basic($this->initialScope);
+    }
+
+    /**
+     * Tests exception when invalid key passed.
+     */
+    public function testExceptionOnInvalidKey(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid key passed");
+
+        $this->registry->get($this);
     }
 
     /**

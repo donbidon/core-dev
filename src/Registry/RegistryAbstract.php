@@ -12,6 +12,7 @@ namespace donbidon\Core\Registry;
 
 use donbidon\Core\Registry\Basic as Environment;
 use donbidon\Core\Registry\Middleware\Middleware;
+use InvalidArgumentException;
 
 /**
  * Registry abstract class.
@@ -80,8 +81,6 @@ abstract class RegistryAbstract implements Registry
      * {@inheritdoc}
      *
      * @param Middleware $middleware
-     *
-     * @return void
      */
     public function addMiddleware(Middleware $middleware): void
     {
@@ -114,6 +113,7 @@ abstract class RegistryAbstract implements Registry
      * Iterator interface implementation.
      *
      * @return mixed
+     *
      * @see https://www.php.net/manual/en/iterator.key.php
      */
     public function key()
@@ -134,8 +134,6 @@ abstract class RegistryAbstract implements Registry
     /**
      * Iterator interface implementation.
      *
-     * @return bool
-     *
      * @see https://www.php.net/manual/en/iterator.valid.php
      */
     public function valid(): bool
@@ -145,8 +143,6 @@ abstract class RegistryAbstract implements Registry
 
     /**
      * Countable interface implementation.
-     *
-     * @return int
      *
      * @see https://www.php.net/manual/en/countable.count.php
      */
@@ -160,13 +156,28 @@ abstract class RegistryAbstract implements Registry
      *
      * @param string      $method
      * @param Environment $env
-     *
-     * @return mixed
      */
-    protected function callMiddleware(string $method, Environment $env)
+    protected function callMiddleware(string $method, Environment $env): void
     {
         foreach ($this->middlewares as $middleware) {
             $middleware->process($method, $env);
+        }
+    }
+
+    /**
+     * Validates key.
+     *
+     * @param ?string|int $key
+     * @param bool        $nullAllowed
+     *
+     * @throws InvalidArgumentException  If invalid key passed.
+     */
+    protected function validateKey($key = null, $nullAllowed = false): void
+    {
+        if (!(
+            \is_string($key) || \is_int($key) || ($nullAllowed ? null === $key : false)
+        )) {
+            throw new InvalidArgumentException("Invalid key passed");
         }
     }
 }

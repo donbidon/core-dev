@@ -53,56 +53,54 @@ class Basic extends RegistryAbstract
     /**
      * {@inheritdoc}
      *
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return void
+     * @param string|int $key
+     * @param mixed      $value
      */
-    public function set(string $key, $value): void
+    public function set($key, $value): void
     {
+        $this->validateKey($key);
         $this->scope[$key] = $value;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @param string $key
-     *
-     * @return bool
+     * @param string|int $key
      */
-    public function exists(string $key): bool
+    public function exists($key): bool
     {
+        $this->validateKey($key);
         $result = \array_key_exists($key, $this->scope);
-
         return $result;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @param string $key
+     * @param string|int $key
      *
      * @return bool
      */
-    public function isEmpty(string $key): bool
+    public function isEmpty($key): bool
     {
+        $this->validateKey($key);
         $result = empty($this->scope[$key]);
-
         return $result;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @param string          $key      If not passed, whole scope will be returned
-     * @param mixed           $default
-     * @param string|int|null $throw    Throw exception or trigger error if no default value passed and
-     *                                  key doesn't exist
+     * @param ?string|int      $key      If not passed, whole scope will be returned
+     * @param mixed            $default
+     * @param ?string|int|null $throw    Throw exception or trigger error if no default value passed and
+     *                                   key doesn't exist
      *
      * @return mixed
      */
-    public function get(?string $key = null, $default = null, $throw = RuntimeException::class)
+    public function get($key = null, $default = null, $throw = RuntimeException::class)
     {
+        $this->validateKey($key, true);
         $result = $default;
         if (\is_null($key)) {
             $result = $this->scope;
@@ -123,12 +121,11 @@ class Basic extends RegistryAbstract
     /**
      * {@inheritdoc}
      *
-     * @para string $key
-     *
-     * @return void
+     * @param string|int $key
      */
-    public function delete(string $key): void
+    public function delete($key): void
     {
+        $this->validateKey($key);
         unset($this->scope[$key]);
     }
 
@@ -137,13 +134,14 @@ class Basic extends RegistryAbstract
      *
      * Replaces all references by its values.
      *
-     * @param string  $key
-     * @param mixed[] $options
+     * @param string|int $key
+     * @param mixed[]    $options
      *
      * @return static
      */
-    public function getBranch(string $key, ?array $options = null)
+    public function getBranch($key, ?array $options = null)
     {
+        $this->validateKey($key);
         $result = new static($this->get(
             $key,
             \is_null($options) ? $this->options : $options

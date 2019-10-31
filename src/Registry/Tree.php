@@ -68,7 +68,7 @@ class Tree extends Basic
     /**
      * Internal key
      *
-     * @var string
+     * @var string|int
      */
     protected $key;
 
@@ -93,31 +93,29 @@ class Tree extends Basic
     /**
      * {@inheritdoc}
      *
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return void
+     * @param string|int $key
+     * @param mixed      $value
      */
-    public function set(string $key, $value): void
+    public function set($key, $value): void
     {
+        $this->validateKey($key);
         $this->setScope($key, true);
         parent::set($key, $value);
-        /** @-noinspection PhpInternalEntityUsedInspection */
         $this->key = null;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @param string $key
+     * @param string|int $key
      *
      * @return bool
      */
-    public function exists(string $key): bool
+    public function exists($key): bool
     {
+        $this->validateKey($key);
         $this->setScope($key);
         $result = \is_array($this->scope) ? parent::exists($key) : false;
-        /** @-noinspection PhpInternalEntityUsedInspection */
         $this->key = null;
 
         return $result;
@@ -126,15 +124,13 @@ class Tree extends Basic
     /**
      * {@inheritdoc}
      *
-     * @param string $key
-     *
-     * @return bool
+     * @param string|int $key
      */
-    public function isEmpty(string $key): bool
+    public function isEmpty($key): bool
     {
+        $this->validateKey($key);
         $this->setScope($key);
         $result = parent::isEmpty($key);
-        /** @-noinspection PhpInternalEntityUsedInspection */
         $this->key = null;
 
         return $result;
@@ -143,20 +139,20 @@ class Tree extends Basic
     /**
      * {@inheritdoc}
      *
-     * @param string          $key      If not passed, whole scope will be returned
-     * @param mixed           $default
-     * @param string|int|null $throw    Throw exception or trigger error if no default value passed and
-     *                                  key doesn't exist
+     * @param ?string|int      $key      If not passed, whole scope will be returned
+     * @param mixed            $default
+     * @param ?string|int|null $throw    Throw exception or trigger error if no default value passed and
+     *                                   key doesn't exist
      *
      * @return mixed
      */
-    public function get(?string $key = null, $default = null, $throw = RuntimeException::class)
+    public function get($key = null, $default = null, $throw = RuntimeException::class)
     {
+        $this->validateKey($key, true);
         if (!\is_null($key)) {
             $this->setScope($key);
         }
         $result = parent::get($key, $default, $throw);
-        /** @-noinspection PhpInternalEntityUsedInspection */
         $this->key = null;
 
         return $result;
@@ -165,31 +161,29 @@ class Tree extends Basic
     /**
      * {@inheritdoc}
      *
-     * @para string $key
-     *
-     * @return void
+     * @param string|int $key
      */
-    public function delete(string $key): void
+    public function delete($key): void
     {
+        $this->validateKey($key);
         $this->setScope($key);
         parent::delete($key);
-        /** @-noinspection PhpInternalEntityUsedInspection */
         $this->key = null;
     }
 
-    /** @-noinspection PhpMissingParentCallCommonInspection */
     /**
      * {@inheritdoc}
      *
      * Replaces all references by its values.
      *
-     * @param string  $key
-     * @param mixed[] $options
+     * @param string|int $key
+     * @param mixed[]    $options
      *
      * @return static
      */
-    public function getBranch(string $key, ?array $options = null)
+    public function getBranch($key, ?array $options = null)
     {
+        $this->validateKey($key);
         $scope = $this->get($key);
         $result = new static($scope, $options);
 
@@ -200,8 +194,6 @@ class Tree extends Basic
      * {@inheritdoc}
      *
      * @param mixed[] $scope
-     *
-     * @return void
      */
     public function override(array $scope): void
     {
@@ -214,8 +206,6 @@ class Tree extends Basic
      *
      * @param &string $key
      * @param bool    $create
-     *
-     * @return void
      */
     protected function setScope(string &$key, bool $create = false): void
     {
@@ -223,7 +213,6 @@ class Tree extends Basic
         if (false === \strpos($key, $this->delimiter)) {
             return;
         }
-        /** @-noinspection PhpInternalEntityUsedInspection */
         $this->key = $key;
         $keys = \explode($this->delimiter, $key);
         $lastKey = \array_pop($keys);

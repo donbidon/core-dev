@@ -40,78 +40,66 @@ interface Registry extends Iterator, Countable
      * Adds middleware to enhance functionality.
      *
      * @param Middleware $middleware
-     *
-     * @return void
      */
     public function addMiddleware(Middleware $middleware): void;
 
     /**
      * Sets scope value.
      *
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return void
+     * @param string|int $key
+     * @param mixed      $value
      */
-    public function set(string $key, $value): void;
+    public function set($key, $value): void;
 
     /**
      * Returns true if scope exists, false otherwise.
      *
-     * @param string $key
-     *
-     * @return bool
+     * @param string|int $key
      */
-    public function exists(string $key): bool;
+    public function exists($key): bool;
 
     /**
      * Returns true if scope value is empty, false otherwise.
      *
-     * @param string $key
+     * @param string|int $key
      *
-     * @return bool
-     *
-     * @link   http://php.net/manual/en/function.empty.php
+     * @link http://php.net/manual/en/function.empty.php
      */
-    public function isEmpty(string $key): bool;
+    public function isEmpty($key): bool;
 
     /**
      * Returns scope value.
      *
-     * @param string          $key      If not passed, whole scope will be returned
-     * @param mixed           $default
-     * @param string|int|null $throw    Throw exception or trigger error if no default value passed and
-     *                                  key doesn't exist
+     * @param ?string|int      $key      If not passed, whole scope will be returned
+     * @param mixed            $default
+     * @param ?string|int|null $throw    Throw exception or trigger error if no default value passed and
+     *                                   key doesn't exist
      *
      * @return mixed
      */
-    public function get(?string $key = null, $default = null, $throw = RuntimeException::class);
+    public function get($key = null, $default = null, $throw = RuntimeException::class);
 
     /**
      * Deletes scope key.
      *
-     * @param string $key
-     *
-     * @return void
+     * @param string|int $key
      */
-    public function delete(string $key): void;
+    public function delete($key): void;
 
     /**
      * Returns new registry from value of the key.
      *
-     * @param string  $key
+     * @param string|int $key
      * @param mixed[] $options
      *
      * @return static
      */
-    public function getBranch(string $key, ?array $options = null);
+    public function getBranch($key, ?array $options = null);
 
     /**
      * Overrides scope.
      *
      * @param mixed[] $scope
-     *
-     * @return void
      */
     public function override(array $scope): void;
 }
