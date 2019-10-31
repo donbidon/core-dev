@@ -55,11 +55,6 @@ class BasicTest extends TestCase
 
     /**
      * Tests exception when missing key and no default value passed.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Basic::__construct
-     * @covers \donbidon\Core\Registry\Basic::get
      */
     public function testExceptionOnNonexistentKey(): void
     {
@@ -71,10 +66,6 @@ class BasicTest extends TestCase
 
     /**
      * Tests triggered error when missing key and no default value passed.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Basic::get
      */
     public function testErrorOnNonexistentKey(): void
     {
@@ -87,14 +78,6 @@ class BasicTest extends TestCase
 
     /**
      * Tests common functionality.
-     *
-     * @return void
-
-     * @covers \donbidon\Core\Registry\Basic::get
-     * @covers \donbidon\Core\Registry\Basic::set
-     * @covers \donbidon\Core\Registry\Basic::delete
-     * @covers \donbidon\Core\Registry\Basic::exists
-     * @covers \donbidon\Core\Registry\Basic::isEmpty
      */
     public function testCommonFunctionality(): void
     {
@@ -122,10 +105,6 @@ class BasicTest extends TestCase
 
     /**
      * Tests override.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Basic::override
      */
     public function testOverride(): void
     {
@@ -135,12 +114,6 @@ class BasicTest extends TestCase
 
     /**
      * Tests new registry creation from value of passed key.
-     *
-     * @return void
-     *
-     * @throws \ReflectionException  Risen from Basic::getBranch().
-     *
-     * @covers \donbidon\Core\Registry\Basic::getBranch
      */
     public function testGetBranch(): void
     {
@@ -155,15 +128,6 @@ class BasicTest extends TestCase
 
     /**
      * Tests Iterator interface implementation.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Basic::__construct
-     * @covers \donbidon\Core\Registry\Basic::rewind
-     * @covers \donbidon\Core\Registry\Basic::current
-     * @covers \donbidon\Core\Registry\Basic::key
-     * @covers \donbidon\Core\Registry\Basic::next
-     * @covers \donbidon\Core\Registry\Basic::valid
      */
     public function testIteratorInterface(): void
     {
@@ -179,11 +143,6 @@ class BasicTest extends TestCase
 
     /**
      * Tests Countable interface implementation.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Basic::__construct
-     * @covers \donbidon\Core\Registry\Basic::count
      */
     public function testCountableInterface(): void
     {
@@ -193,14 +152,8 @@ class BasicTest extends TestCase
         );
     }
 
-
     /**
      * Tests Countable interface implementation.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Basic::__construct
-     * @covers \donbidon\Core\Registry\Basic::options
      */
     public function testOptions(): void
     {

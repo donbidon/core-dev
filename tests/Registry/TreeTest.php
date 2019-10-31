@@ -54,12 +54,6 @@ class TreeTest extends TestCase
 
     /**
      * Tests default and custom keys delimiters.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Tree::__construct
-     * @covers \donbidon\Core\Registry\Tree::get
-     * @covers \donbidon\Core\Registry\Tree::setScope
      */
     public function testDelimiters(): void
     {
@@ -73,11 +67,6 @@ class TreeTest extends TestCase
 
     /**
      * Tests exception when missing key and no default value passed.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Tree::__construct
-     * @covers \donbidon\Core\Registry\Tree::get
      */
     public function testExceptionOnNonexistentKey(): void
     {
@@ -89,10 +78,6 @@ class TreeTest extends TestCase
 
     /**
      * Tests triggered error when missing key and no default value passed.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Tree::get
      */
     public function testErrorOnNonexistentKey(): void
     {
@@ -105,15 +90,6 @@ class TreeTest extends TestCase
 
     /**
      * Tests common functionality.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Tree::get
-     * @covers \donbidon\Core\Registry\Tree::set
-     * @covers \donbidon\Core\Registry\Tree::delete
-     * @covers \donbidon\Core\Registry\Tree::exists
-     * @covers \donbidon\Core\Registry\Tree::isEmpty
-     * @covers \donbidon\Core\Registry\Tree::setScope
      */
     public function testCommonFunctionality(): void
     {
@@ -162,10 +138,6 @@ class TreeTest extends TestCase
 
     /**
      * Tests override.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Tree::override
      */
     public function testOverride(): void
     {
@@ -175,10 +147,6 @@ class TreeTest extends TestCase
 
     /**
      * Tests new registry creation from value of passed key.
-     *
-     * @return void
-     *
-     * @covers \donbidon\Core\Registry\Tree::getBranch
      */
     public function testGetBranch(): void
     {
@@ -195,13 +163,6 @@ class TreeTest extends TestCase
 
     /**
      * Tests new registry creation from value of passed key.
-     *
-     * @return void
-     *
-     * @1covers \donbidon\Core\Registry\RegistryAbstract::addMiddleware
-     * @1covers \donbidon\Core\Registry\RegistryAbstract::callMiddleware
-     * @1covers \donbidon\Core\Registry\Middleware\MiddlewareAbstract::process
-     * @1covers \donbidon\Core\Registry\Middleware\MiddlewareAbstract::handle
      */
     public function testMiddleware(): void
     {
