@@ -175,7 +175,7 @@ abstract class RegistryAbstract implements Registry
     protected function validateKey($key = null, $nullAllowed = false): void
     {
         if (!(
-            \is_string($key) || \is_int($key) || ($nullAllowed ? null === $key : false)
+            \is_string($key) || \is_int($key) || ($nullAllowed ? \is_null($key) : false)
         )) {
             throw new InvalidArgumentException("Invalid key passed");
         }
