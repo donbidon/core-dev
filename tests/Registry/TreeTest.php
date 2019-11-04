@@ -54,6 +54,9 @@ class TreeTest extends TestCase
 
     /**
      * Tests default and custom keys delimiters.
+     *
+     * @covers \donbidon\Core\Registry\Tree::__construct
+     * @covers \donbidon\Core\Registry\Tree::get
      */
     public function testDelimiters(): void
     {
@@ -67,29 +70,70 @@ class TreeTest extends TestCase
 
     /**
      * Tests exception when missing key and no default value passed.
+     *
+     * @covers \donbidon\Core\Registry\Tree::get
+     * @covers \donbidon\Core\Registry\Tree::setScope
      */
     public function testExceptionOnNonexistentKey(): void
     {
+        $key = 'nonexistent_key';
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage("Missing key 'nonexistent_key'");
-
-        $this->registry->get('nonexistent_key');
+        $this->expectExceptionMessage(\sprintf("Missing key '%s'", $key));
+        $this->registry->get($key);
     }
 
     /**
      * Tests triggered error when missing key and no default value passed.
+     *
+     * @covers \donbidon\Core\Registry\Tree::get
+     * @covers \donbidon\Core\Registry\Tree::setScope
      */
     public function testErrorOnNonexistentKey(): void
     {
+        $key = 'nonexistent_key';
         $this->expectException(PHPUnitException::class);
         $this->expectExceptionCode(\E_USER_WARNING);
-        $this->expectExceptionMessage("Missing key 'nonexistent_key'");
+        $this->expectExceptionMessage(\sprintf("Missing key '%s'", $key));
+        $this->registry->get($key, null, \E_USER_WARNING);
+    }
 
-        $this->registry->get('nonexistent_key', null, \E_USER_WARNING);
+    /**
+     * Tests exception when missing complex key and no default value passed.
+     *
+     * @covers \donbidon\Core\Registry\Tree::get
+     * @covers \donbidon\Core\Registry\Tree::setScope
+     */
+    public function testExceptionOnNonexistentComplexKey(): void
+    {
+        $key = 'key_2/key_2_1/nonexistent_key';
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage(\sprintf("Missing key '%s'", $key));
+        $this->registry->get($key);
+    }
+
+    /**
+     * Tests triggered error when missing key and no default value passed.
+     *
+     * @covers \donbidon\Core\Registry\Tree::get
+     * @covers \donbidon\Core\Registry\Tree::setScope
+     */
+    public function testErrorOnNonexistentComplexKey(): void
+    {
+        $key = 'key_2/nonexistent_key/nonexistent_key';
+        $this->expectException(PHPUnitException::class);
+        $this->expectExceptionCode(\E_USER_WARNING);
+        $this->expectExceptionMessage(\sprintf("Missing key '%s'", $key));
+        $this->registry->get($key, null, \E_USER_WARNING);
     }
 
     /**
      * Tests common functionality.
+     *
+     * @covers \donbidon\Core\Registry\Tree::delete
+     * @covers \donbidon\Core\Registry\Tree::exists
+     * @covers \donbidon\Core\Registry\Tree::get
+     * @covers \donbidon\Core\Registry\Tree::isEmpty
+     * @covers \donbidon\Core\Registry\Tree::setScope
      */
     public function testCommonFunctionality(): void
     {

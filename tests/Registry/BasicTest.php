@@ -56,40 +56,52 @@ class BasicTest extends TestCase
 
     /**
      * Tests exception when invalid key passed.
+     *
+     * @covers \donbidon\Core\Registry\Basic::get
+     * @covers \donbidon\Core\Registry\RegistryAbstract::validateKey
      */
     public function testExceptionOnInvalidKey(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid key passed");
-
         $this->registry->get($this);
     }
 
     /**
      * Tests exception when missing key and no default value passed.
+     *
+     * @covers \donbidon\Core\Registry\Basic::get
      */
     public function testExceptionOnNonexistentKey(): void
     {
+        $key = 'nonexistent_key';
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage("Missing key 'nonexistent_key'");
-
-        $this->registry->get('nonexistent_key');
+        $this->expectExceptionMessage(\sprintf("Missing key '%s'", $key));
+        $this->registry->get($key);
     }
 
     /**
      * Tests triggered error when missing key and no default value passed.
+     *
+     * @covers \donbidon\Core\Registry\Basic::get
      */
     public function testErrorOnNonexistentKey(): void
     {
+        $key = 'nonexistent_key';
         $this->expectException(PHPUnitException::class);
         $this->expectExceptionCode(\E_USER_WARNING);
-        $this->expectExceptionMessage("Missing key 'nonexistent_key'");
-
-        $this->registry->get('nonexistent_key', null, \E_USER_WARNING);
+        $this->expectExceptionMessage(\sprintf("Missing key '%s'", $key));
+        $this->registry->get($key, null, \E_USER_WARNING);
     }
 
     /**
      * Tests common functionality.
+     *
+     * @covers \donbidon\Core\Registry\Basic::delete
+     * @covers \donbidon\Core\Registry\Basic::exists
+     * @covers \donbidon\Core\Registry\Basic::get
+     * @covers \donbidon\Core\Registry\Basic::isEmpty
+     * @covers \donbidon\Core\Registry\Basic::set
      */
     public function testCommonFunctionality(): void
     {
@@ -117,29 +129,36 @@ class BasicTest extends TestCase
 
     /**
      * Tests override.
+     *
+     * @covers \donbidon\Core\Registry\Basic::override
      */
     public function testOverride(): void
     {
-        $this->registry->override(['key_1' => "value_1*"]);
-        self::assertEquals("value_1*", $this->registry->get('key_1'));
+        $expected = "value_1*";
+        $this->registry->override(['key_1' => $expected]);
+        self::assertEquals($expected, $this->registry->get('key_1'));
     }
 
     /**
      * Tests new registry creation from value of passed key.
+     *
+     * @covers \donbidon\Core\Registry\Basic::getBranch
      */
     public function testGetBranch(): void
     {
-        $registry = $this->registry->getBranch('array');
-        self::assertEquals(
-            [
-                'key_1_1' => "value_1_1",
-            ],
-            $registry->get()
-        );
+        $branch = $this->registry->getBranch('array');
+        $expected = ['key_1_1' => "value_1_1"];
+        self::assertEquals($expected, $branch->get());
     }
 
     /**
      * Tests Iterator interface implementation.
+     *
+     * @covers \donbidon\Core\Registry\RegistryAbstract::rewind
+     * @covers \donbidon\Core\Registry\RegistryAbstract::current
+     * @covers \donbidon\Core\Registry\RegistryAbstract::key
+     * @covers \donbidon\Core\Registry\RegistryAbstract::next
+     * @covers \donbidon\Core\Registry\RegistryAbstract::valid
      */
     public function testIteratorInterface(): void
     {
@@ -147,31 +166,29 @@ class BasicTest extends TestCase
         foreach ($this->registry as $value) {
             $result[$this->registry->key()] = $value;
         }
-        self::assertEquals(
-            $this->initialScope,
-            $result
-        );
+        $expected = $this->initialScope;
+        self::assertEquals($expected, $result);
     }
 
     /**
      * Tests Countable interface implementation.
+     *
+     * @covers \donbidon\Core\Registry\RegistryAbstract::count
      */
     public function testCountableInterface(): void
     {
-        self::assertEquals(
-            \count($this->initialScope),
-            \count($this->registry)
-        );
+        $expected = \count($this->initialScope);
+        self::assertEquals($expected, \count($this->registry));
     }
 
     /**
      * Tests Countable interface implementation.
+     *
+     * @covers \donbidon\Core\Registry\RegistryAbstract::options
      */
     public function testOptions(): void
     {
-        self::assertEquals(
-            [],
-            $this->registry->options()
-        );
+        $expected = [];
+        self::assertEquals($expected, $this->registry->options());
     }
 }

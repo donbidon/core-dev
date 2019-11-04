@@ -35,7 +35,8 @@ use RuntimeException;
  * bool(false)
  * ```
  *
- * @todo Rewrite docs.
+ * @todo Implement middleware calls.
+ * @todo Rewrite documentation.
  */
 class Tree extends Basic
 {
@@ -114,10 +115,13 @@ class Tree extends Basic
     public function exists($key): bool
     {
         $this->validateKey($key);
-        $this->setScope($key);
-        $result = \is_array($this->scope) ? parent::exists($key) : false;
+        try {
+            $this->setScope($key);
+            $result = \is_array($this->scope) ? parent::exists($key) : false;
+        } catch (RuntimeException $e) {
+            $result = false;
+        }
         $this->key = null;
-
         return $result;
     }
 
@@ -129,10 +133,13 @@ class Tree extends Basic
     public function isEmpty($key): bool
     {
         $this->validateKey($key);
-        $this->setScope($key);
-        $result = parent::isEmpty($key);
+        try {
+            $this->setScope($key);
+            $result = parent::isEmpty($key);
+        } catch (RuntimeException $e) {
+            $result = true;
+        }
         $this->key = null;
-
         return $result;
     }
 
@@ -149,12 +156,25 @@ class Tree extends Basic
     public function get($key = null, $default = null, $throw = RuntimeException::class)
     {
         $this->validateKey($key, true);
-        if (!\is_null($key)) {
-            $this->setScope($key);
+        $origKey = $key;
+        $result = null;
+        if (\is_null($key)) {
+            $result = parent::get($key, $default, $throw);
+        } else {
+            try {
+                $this->setScope($key, false, $throw);
+                $result = parent::get($key, $default, $throw);
+                $this->key = null;
+            } catch (RuntimeException $e) {
+                $message = \sprintf("Missing key '%s'", $origKey);
+                $this->key = null;
+                if (\is_string($throw)) {
+                    throw new $throw($message);
+                } else {
+                    \trigger_error($message, $throw);
+                }
+            }
         }
-        $result = parent::get($key, $default, $throw);
-        $this->key = null;
-
         return $result;
     }
 
@@ -186,7 +206,6 @@ class Tree extends Basic
         $this->validateKey($key);
         $scope = $this->get($key);
         $result = new static($scope, $options);
-
         return $result;
     }
 
@@ -206,6 +225,8 @@ class Tree extends Basic
      *
      * @param &string $key
      * @param bool    $create
+     *
+     * @throws RuntimeException
      */
     protected function setScope(string &$key, bool $create = false): void
     {
@@ -234,6 +255,9 @@ class Tree extends Basic
             //     $key = $env->get(':key:');
             //     $this->setScope($key, $create);
             // }
+            if (!is_array($this->scope[$key])) {
+                throw new RuntimeException("Complex scope must be an array");
+            }
             $this->scope = &$this->scope[$key];
         }
         $key = $lastKey;
