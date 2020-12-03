@@ -172,7 +172,7 @@ class Tree extends Basic
             $result = parent::get($key, $default, $throw);
         } else {
             try {
-                $this->setScope($key, false, $throw);
+                $this->setScope($key, false);
                 $result = parent::get($key, $default, $throw);
                 $this->key = null;
             } catch (RuntimeException $e) {
