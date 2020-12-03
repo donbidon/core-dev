@@ -159,6 +159,7 @@ abstract class RegistryAbstract implements Registry
 
     /**
      * Calls middleware handlers.
+     *
      * @noinspection PhpDocSignatureInspection
      */
     protected function callMiddleware(string $method, Environment $env): void
