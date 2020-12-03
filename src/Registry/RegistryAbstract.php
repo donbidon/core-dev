@@ -84,8 +84,6 @@ abstract class RegistryAbstract implements Registry
 
     /**
      * {@inheritdoc}
-     *
-     * @param Middleware $middleware
      */
     public function addMiddleware(Middleware $middleware): void
     {
@@ -158,9 +156,6 @@ abstract class RegistryAbstract implements Registry
 
     /**
      * Calls middleware handlers.
-     *
-     * @param string      $method
-     * @param Environment $env
      */
     protected function callMiddleware(string $method, Environment $env): void
     {
@@ -172,12 +167,9 @@ abstract class RegistryAbstract implements Registry
     /**
      * Validates key.
      *
-     * @param ?string|int $key
-     * @param bool        $nullAllowed
-     *
      * @throws InvalidArgumentException  If invalid key passed.
      */
-    protected function validateKey($key = null, $nullAllowed = false): void
+    protected function validateKey(?string $key = null, bool $nullAllowed = false): void
     {
         if (!(
             is_string($key) || is_int($key) || ($nullAllowed ? is_null($key) : false)

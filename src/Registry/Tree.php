@@ -118,8 +118,6 @@ class Tree extends Basic
      * {@inheritdoc}
      *
      * @param string|int $key
-     *
-     * @return bool
      */
     public function exists($key): bool
     {
@@ -203,8 +201,6 @@ class Tree extends Basic
     /**
      * {@inheritdoc}
      *
-     * Replaces all references by its values.
-     *
      * @param string|int $key
      * @param mixed[]    $options
      *
@@ -214,6 +210,7 @@ class Tree extends Basic
     {
         $this->validateKey($key);
         $scope = $this->get($key);
+        /** @noinspection PhpUnnecessaryLocalVariableInspection */
         $result = new static($scope, $options);
         return $result;
     }
@@ -232,10 +229,8 @@ class Tree extends Basic
     /**
      * Shifts scope according to complex key.
      *
-     * @param &string $key
-     * @param bool    $create
-     *
      * @throws RuntimeException
+     * @noinspection PhpDocSignatureInspection
      */
     protected function setScope(string &$key, bool $create = false): void
     {

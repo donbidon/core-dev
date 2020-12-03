@@ -57,9 +57,6 @@ class Basic extends RegistryAbstract
 {
     /**
      * {@inheritdoc}
-     *
-     * @param string|int $key
-     * @param mixed      $value
      */
     public function set($key, $value): void
     {
@@ -69,26 +66,22 @@ class Basic extends RegistryAbstract
 
     /**
      * {@inheritdoc}
-     *
-     * @param string|int $key
      */
     public function exists($key): bool
     {
         $this->validateKey($key);
+        /** @noinspection PhpUnnecessaryLocalVariableInspection */
         $result = array_key_exists($key, $this->scope);
         return $result;
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @param string|int $key
-     *
-     * @return bool
      */
     public function isEmpty($key): bool
     {
         $this->validateKey($key);
+        /** @noinspection PhpUnnecessaryLocalVariableInspection */
         $result = empty($this->scope[$key]);
         return $result;
     }
@@ -125,8 +118,6 @@ class Basic extends RegistryAbstract
 
     /**
      * {@inheritdoc}
-     *
-     * @param string|int $key
      */
     public function delete($key): void
     {
@@ -137,28 +128,21 @@ class Basic extends RegistryAbstract
     /**
      * {@inheritdoc}
      *
-     * Replaces all references by its values.
-     *
-     * @param string|int $key
-     * @param mixed[]    $options
-     *
      * @return static
      */
     public function getBranch($key, ?array $options = null)
     {
         $this->validateKey($key);
+        /** @noinspection PhpUnnecessaryLocalVariableInspection */
         $result = new static($this->get(
             $key,
             is_null($options) ? $this->options : $options
         ));
-
         return $result;
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @param mixed[] $scope
      *
      * @return void
      */
