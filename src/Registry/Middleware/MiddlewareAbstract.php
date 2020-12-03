@@ -2,8 +2,8 @@
 /**
  * Registry middleware abstract class.
  *
- * @copyright <a href="http://donbidon.rf.gd/" target="_blank">donbidon</a>
- * @license   https://opensource.org/licenses/mit-license.php
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license https://opensource.org/licenses/mit-license.php
  */
 
 declare(strict_types=1);
@@ -17,6 +17,9 @@ use function preg_replace;
 
 /**
  * Registry middleware abstract class.
+ *
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license https://opensource.org/licenses/mit-license.php
  */
 abstract class MiddlewareAbstract implements Middleware
 {

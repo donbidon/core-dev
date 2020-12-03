@@ -2,8 +2,8 @@
 /**
  * Tree registry functionality.
  *
- * @copyright <a href="http://donbidon.rf.gd/" target="_blank">donbidon</a>
- * @license   https://opensource.org/licenses/mit-license.php
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license https://opensource.org/licenses/mit-license.php
  */
 
 declare(strict_types=1);
@@ -43,6 +43,9 @@ use function trigger_error;
  *
  * bool(false)
  * ```
+ *
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license https://opensource.org/licenses/mit-license.php
  *
  * @todo Implement middleware calls.
  * @todo Rewrite documentation.

@@ -2,8 +2,8 @@
 /**
  * Registry middleware class unit tests.
  *
- * @copyright <a href="http://donbidon.rf.gd/" target="_blank">donbidon</a>
- * @license   https://opensource.org/licenses/mit-license.php
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license https://opensource.org/licenses/mit-license.php
  */
 
 declare(strict_types=1);
@@ -14,6 +14,9 @@ use donbidon\Core\Registry\Registry;
 
 /**
  * Registry middleware class unit tests.
+ *
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license https://opensource.org/licenses/mit-license.php
  */
 class Stub extends MiddlewareAbstract
 {
