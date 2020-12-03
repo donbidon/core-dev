@@ -39,10 +39,10 @@ class Stub extends MiddlewareAbstract
 
     /**
      * @param Registry $env  Environment
+     * @noinspection PhpUnusedParameterInspection
      */
     protected function setScope(Registry $env): void
     {
-        $env;
         $this->registry->set('middleware', true);
     }
 }

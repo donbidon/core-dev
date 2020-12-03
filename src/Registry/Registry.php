@@ -58,6 +58,7 @@ interface Registry extends Iterator, Countable
      * Returns true if scope exists, false otherwise.
      *
      * @param string|int $key
+     * @noinspection PhpDocMissingReturnTagInspection
      */
     public function exists($key): bool;
 
@@ -67,6 +68,7 @@ interface Registry extends Iterator, Countable
      * @param string|int $key
      *
      * @link http://php.net/manual/en/function.empty.php
+     * @noinspection PhpDocMissingReturnTagInspection
      */
     public function isEmpty($key): bool;
 

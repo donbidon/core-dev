@@ -159,6 +159,7 @@ abstract class RegistryAbstract implements Registry
 
     /**
      * Calls middleware handlers.
+     * @noinspection PhpDocSignatureInspection
      */
     protected function callMiddleware(string $method, Environment $env): void
     {
@@ -171,6 +172,7 @@ abstract class RegistryAbstract implements Registry
      * Validates key.
      *
      * @throws InvalidArgumentException  If invalid key passed.
+     * @noinspection PhpDocSignatureInspection
      */
     protected function validateKey(?string $key = null, bool $nullAllowed = false): void
     {
