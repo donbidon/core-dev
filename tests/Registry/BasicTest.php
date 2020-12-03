@@ -14,6 +14,9 @@ use InvalidArgumentException;
 use PHPUnit\Framework\Exception as PHPUnitException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+use function count;
+use function sprintf;
+use const E_USER_WARNING;
 
 /**
  * Basic registry class unit tests.
@@ -79,7 +82,7 @@ class BasicTest extends TestCase
     {
         $key = 'nonexistent_key';
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(\sprintf("Missing key '%s'", $key));
+        $this->expectExceptionMessage(sprintf("Missing key '%s'", $key));
         $this->registry->get($key);
     }
 
@@ -92,9 +95,9 @@ class BasicTest extends TestCase
     {
         $key = 'nonexistent_key';
         $this->expectException(PHPUnitException::class);
-        $this->expectExceptionCode(\E_USER_WARNING);
-        $this->expectExceptionMessage(\sprintf("Missing key '%s'", $key));
-        $this->registry->get($key, null, \E_USER_WARNING);
+        $this->expectExceptionCode(E_USER_WARNING);
+        $this->expectExceptionMessage(sprintf("Missing key '%s'", $key));
+        $this->registry->get($key, null, E_USER_WARNING);
     }
 
     /**
@@ -180,8 +183,8 @@ class BasicTest extends TestCase
      */
     public function testCountableInterface(): void
     {
-        $expected = \count($this->initialScope);
-        self::assertEquals($expected, \count($this->registry));
+        $expected = count($this->initialScope);
+        self::assertEquals($expected, count($this->registry));
     }
 
     /**
