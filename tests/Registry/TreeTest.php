@@ -14,8 +14,8 @@ use donbidon\Core\Registry\Middleware\Stub;
 use PHPUnit\Framework\Exception as PHPUnitException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use function sprintf;
 use const E_USER_WARNING;
+use function sprintf;
 
 /**
  * Tree registry class unit tests.
@@ -83,7 +83,7 @@ class TreeTest extends TestCase
     {
         $key = 'nonexistent_key';
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(sprintf("Missing key '%s'", $key));
+        $this->expectExceptionMessage(sprintf("Nonexistent key '%s'", $key));
         $this->registry->get($key);
     }
 
@@ -98,7 +98,7 @@ class TreeTest extends TestCase
         $key = 'nonexistent_key';
         $this->expectException(PHPUnitException::class);
         $this->expectExceptionCode(E_USER_WARNING);
-        $this->expectExceptionMessage(sprintf("Missing key '%s'", $key));
+        $this->expectExceptionMessage(sprintf("Nonexistent key '%s'", $key));
         $this->registry->get($key, null, E_USER_WARNING);
     }
 
@@ -112,7 +112,7 @@ class TreeTest extends TestCase
     {
         $key = 'key_2/key_2_1/nonexistent_key';
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(sprintf("Missing key '%s'", $key));
+        $this->expectExceptionMessage(sprintf("Nonexistent key '%s'", $key));
         $this->registry->get($key);
     }
 
@@ -127,7 +127,7 @@ class TreeTest extends TestCase
         $key = 'key_2/nonexistent_key/nonexistent_key';
         $this->expectException(PHPUnitException::class);
         $this->expectExceptionCode(E_USER_WARNING);
-        $this->expectExceptionMessage(sprintf("Missing key '%s'", $key));
+        $this->expectExceptionMessage(sprintf("Nonexistent key '%s'", $key));
         $this->registry->get($key, null, E_USER_WARNING);
     }
 

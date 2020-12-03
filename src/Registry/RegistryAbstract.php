@@ -172,10 +172,12 @@ abstract class RegistryAbstract implements Registry
     /**
      * Validates key.
      *
+     * @param ?string|?int $key
+     * @param bool $nullAllowed
+     *
      * @throws InvalidArgumentException  If invalid key passed.
-     * @noinspection PhpDocSignatureInspection
      */
-    protected function validateKey(?string $key = null, bool $nullAllowed = false): void
+    protected function validateKey($key = null, bool $nullAllowed = false): void
     {
         if (!(
             is_string($key) || is_int($key) || ($nullAllowed ? is_null($key) : false)

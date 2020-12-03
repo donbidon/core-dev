@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace donbidon\Core\Registry;
 
-use RuntimeException;
+use InvalidArgumentException;
 use function array_key_exists;
 use function is_null;
 use function is_string;
@@ -99,7 +99,7 @@ class Basic extends RegistryAbstract
      *
      * @return mixed
      */
-    public function get($key = null, $default = null, $throw = RuntimeException::class)
+    public function get($key = null, $default = null, $throw = InvalidArgumentException::class)
     {
         $this->validateKey($key, true);
         $result = $default;
@@ -107,8 +107,8 @@ class Basic extends RegistryAbstract
             $result = $this->scope;
         } elseif (array_key_exists($key, $this->scope)) {
             $result = $this->scope[$key];
-        } elseif (is_null($default) && $throw) {
-            $message = sprintf("Missing key '%s'", $key);
+        } elseif (is_null($default) && null !== $throw) {
+            $message = sprintf("Nonexistent key '%s'", $key);
             if (is_string($throw)) {
                 throw new $throw($message);
             } else {

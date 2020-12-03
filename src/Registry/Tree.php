@@ -176,7 +176,7 @@ class Tree extends Basic
                 $result = parent::get($key, $default, $throw);
                 $this->key = null;
             } catch (RuntimeException $e) {
-                $message = sprintf("Missing key '%s'", $origKey);
+                $message = sprintf("Nonexistent key '%s'", $origKey);
                 $this->key = null;
                 if (is_string($throw)) {
                     throw new $throw($message);

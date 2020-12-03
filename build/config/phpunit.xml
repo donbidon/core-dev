@@ -3,7 +3,6 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
         bootstrap="../../vendor/autoload.php"
-        cacheResult="true"
         colors="true"
         verbose="true"
 >
@@ -12,9 +11,13 @@
     </php>
 
     <testsuites>
-        <testsuite name="Package">
-            <directory>../../tests</directory>
+        <testsuite name="Registry">
+            <directory>../../tests/Registry</directory>
         </testsuite>
+        <!-- testsuite name="Events">
+            <directory>../../tests/Event</directory>
+            <directory>../../tests/src/Event</directory>
+        </testsuite -->
     </testsuites>
 
     <filter>

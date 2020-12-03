@@ -37,6 +37,7 @@ class Stub extends MiddlewareAbstract
         $this->handle(true);
     }
 
+    // phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
     /**
      * @param Registry $env  Environment
      * @noinspection PhpUnusedParameterInspection
@@ -45,4 +46,5 @@ class Stub extends MiddlewareAbstract
     {
         $this->registry->set('middleware', true);
     }
+    // phpcs:enable
 }

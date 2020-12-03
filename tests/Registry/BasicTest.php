@@ -13,10 +13,9 @@ namespace donbidon\Core\Registry;
 use InvalidArgumentException;
 use PHPUnit\Framework\Exception as PHPUnitException;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
+use const E_USER_WARNING;
 use function count;
 use function sprintf;
-use const E_USER_WARNING;
 
 /**
  * Basic registry class unit tests.
@@ -70,7 +69,7 @@ class BasicTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid key passed");
-        $this->registry->get($this);
+        $this->registry->get([]);
     }
 
     /**
@@ -81,8 +80,8 @@ class BasicTest extends TestCase
     public function testExceptionOnNonexistentKey(): void
     {
         $key = 'nonexistent_key';
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(sprintf("Missing key '%s'", $key));
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(sprintf("Nonexistent key '%s'", $key));
         $this->registry->get($key);
     }
 
@@ -96,7 +95,7 @@ class BasicTest extends TestCase
         $key = 'nonexistent_key';
         $this->expectException(PHPUnitException::class);
         $this->expectExceptionCode(E_USER_WARNING);
-        $this->expectExceptionMessage(sprintf("Missing key '%s'", $key));
+        $this->expectExceptionMessage(sprintf("Nonexistent key '%s'", $key));
         $this->registry->get($key, null, E_USER_WARNING);
     }
 
