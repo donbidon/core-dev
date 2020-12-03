@@ -3,7 +3,7 @@
  * Registry abstract class.
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  */
 
 declare(strict_types=1);
@@ -23,7 +23,7 @@ use function sizeof;
  * Registry abstract class.
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  */
 abstract class RegistryAbstract implements Registry
 {

@@ -3,7 +3,7 @@
  * Tree registry class unit tests.
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  */
 
 declare(strict_types=1);
@@ -21,7 +21,7 @@ use function sprintf;
  * Tree registry class unit tests.
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  */
 class TreeTest extends TestCase
 {

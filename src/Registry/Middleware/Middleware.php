@@ -3,7 +3,7 @@
  * Middleware interface used to enhance registry functionality.
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  */
 
 declare(strict_types=1);
@@ -16,7 +16,7 @@ use donbidon\Core\Registry\Registry;
  * Middleware interface used to enhance registry functionality.
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  */
 interface Middleware
 {

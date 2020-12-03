@@ -3,7 +3,7 @@
  * Registry interface.
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  */
 
 declare(strict_types=1);
@@ -19,7 +19,7 @@ use RuntimeException;
  * Registry interface.
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  */
 interface Registry extends Iterator, Countable
 {

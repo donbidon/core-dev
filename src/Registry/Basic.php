@@ -3,7 +3,7 @@
  * Registry functionality.
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  */
 
 declare(strict_types=1);
@@ -51,7 +51,7 @@ use function trigger_error;
  * ```
  *
  * @author  [donbidon](http://donbidon.rf.gd/)
- * @license https://opensource.org/licenses/mit-license.php
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
  *
  * @todo Implement middleware calls.
  * @todo Rewrite documentation.
