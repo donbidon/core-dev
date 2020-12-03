@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor configVersion="3">
+    <title>donbidon/core-dev</title>
+    <paths>
+        <output>build/output/docs</output>
+    </paths>
+    <version number="3.0.0">
+        <folder>latest</folder>
+        <api>
+            <source dsn=".">
+                <path>src</path>
+            </source>
+            <output>api</output>
+            <!-- ignore hidden="true" symlinks="true">
+                <path>tests/**/*</path>
+                <path>build/**/*</path>
+                <path>vendor/**/*</path>
+            </ignore -->
+            <extensions>
+                <extension>php</extension>
+            </extensions>
+            <default-package-name>core-dev</default-package-name>
+        </api>
+        <guide>
+            <source dsn=".">
+                <path>docs</path>
+            </source>
+            <output>guide</output>
+        </guide>
+    </version>
+    <template name="clean"/>
+</phpdocumentor>
