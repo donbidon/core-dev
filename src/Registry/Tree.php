@@ -12,6 +12,15 @@ namespace donbidon\Core\Registry;
 
 use donbidon\Core\Registry\Basic as Environment;
 use RuntimeException;
+use function array_pop;
+use function explode;
+use function is_array;
+use function is_null;
+use function is_string;
+use function sizeof;
+use function sprintf;
+use function strpos;
+use function trigger_error;
 
 /**
  * Tree registry functionality.
@@ -117,7 +126,7 @@ class Tree extends Basic
         $this->validateKey($key);
         try {
             $this->setScope($key);
-            $result = \is_array($this->scope) ? parent::exists($key) : false;
+            $result = is_array($this->scope) ? parent::exists($key) : false;
         } catch (RuntimeException $e) {
             $result = false;
         }
@@ -158,7 +167,7 @@ class Tree extends Basic
         $this->validateKey($key, true);
         $origKey = $key;
         $result = null;
-        if (\is_null($key)) {
+        if (is_null($key)) {
             $result = parent::get($key, $default, $throw);
         } else {
             try {
@@ -166,12 +175,12 @@ class Tree extends Basic
                 $result = parent::get($key, $default, $throw);
                 $this->key = null;
             } catch (RuntimeException $e) {
-                $message = \sprintf("Missing key '%s'", $origKey);
+                $message = sprintf("Missing key '%s'", $origKey);
                 $this->key = null;
-                if (\is_string($throw)) {
+                if (is_string($throw)) {
                     throw new $throw($message);
                 } else {
-                    \trigger_error($message, $throw);
+                    trigger_error($message, $throw);
                 }
             }
         }
@@ -231,15 +240,15 @@ class Tree extends Basic
     protected function setScope(string &$key, bool $create = false): void
     {
         $this->scope = &$this->wholeScope;
-        if (false === \strpos($key, $this->delimiter)) {
+        if (false === strpos($key, $this->delimiter)) {
             return;
         }
         $this->key = $key;
-        $keys = \explode($this->delimiter, $key);
-        $lastKey = \array_pop($keys);
-        $lastIndex = \sizeof($keys) - 1;
+        $keys = explode($this->delimiter, $key);
+        $lastKey = array_pop($keys);
+        $lastIndex = sizeof($keys) - 1;
         foreach ($keys as $index => $key) {
-            if (!isset($this->scope[$key]) || !\is_array($this->scope[$key])) {
+            if (!isset($this->scope[$key]) || !is_array($this->scope[$key])) {
                 if ($create) {
                     $this->scope[$key] = [];
                 } elseif (!isset($this->scope[$key]) && $index == $lastIndex) {

@@ -13,6 +13,11 @@ namespace donbidon\Core\Registry;
 use donbidon\Core\Registry\Basic as Environment;
 use donbidon\Core\Registry\Middleware\Middleware;
 use InvalidArgumentException;
+use function array_keys;
+use function is_int;
+use function is_null;
+use function is_string;
+use function sizeof;
 
 /**
  * Registry abstract class.
@@ -63,7 +68,7 @@ abstract class RegistryAbstract implements Registry
     public function __construct(array $scope = [], ?array $options = null)
     {
         $this->scope    = $scope;
-        $this->options  = \is_null($options) ? $this->defaults : $options;
+        $this->options  = is_null($options) ? $this->defaults : $options;
         $this->rewind();
     }
 
@@ -106,7 +111,7 @@ abstract class RegistryAbstract implements Registry
      */
     public function current()
     {
-        return $this->scope[(\array_keys($this->scope))[$this->position]];
+        return $this->scope[array_keys($this->scope)[$this->position]];
     }
 
     /**
@@ -118,7 +123,7 @@ abstract class RegistryAbstract implements Registry
      */
     public function key()
     {
-        return (\array_keys($this->scope))[$this->position];
+        return array_keys($this->scope)[$this->position];
     }
 
     /**
@@ -138,7 +143,7 @@ abstract class RegistryAbstract implements Registry
      */
     public function valid(): bool
     {
-        return isset((\array_keys($this->scope))[$this->position]);
+        return isset(array_keys($this->scope)[$this->position]);
     }
 
     /**
@@ -148,7 +153,7 @@ abstract class RegistryAbstract implements Registry
      */
     public function count(): int
     {
-        return \sizeof($this->scope);
+        return sizeof($this->scope);
     }
 
     /**
@@ -175,7 +180,7 @@ abstract class RegistryAbstract implements Registry
     protected function validateKey($key = null, $nullAllowed = false): void
     {
         if (!(
-            \is_string($key) || \is_int($key) || ($nullAllowed ? \is_null($key) : false)
+            is_string($key) || is_int($key) || ($nullAllowed ? is_null($key) : false)
         )) {
             throw new InvalidArgumentException("Invalid key passed");
         }

@@ -11,6 +11,11 @@ declare(strict_types=1);
 namespace donbidon\Core\Registry;
 
 use RuntimeException;
+use function array_key_exists;
+use function is_null;
+use function is_string;
+use function sprintf;
+use function trigger_error;
 
 /**
  * Static and non-static registry functionality.
@@ -70,7 +75,7 @@ class Basic extends RegistryAbstract
     public function exists($key): bool
     {
         $this->validateKey($key);
-        $result = \array_key_exists($key, $this->scope);
+        $result = array_key_exists($key, $this->scope);
         return $result;
     }
 
@@ -102,16 +107,16 @@ class Basic extends RegistryAbstract
     {
         $this->validateKey($key, true);
         $result = $default;
-        if (\is_null($key)) {
+        if (is_null($key)) {
             $result = $this->scope;
-        } elseif (\array_key_exists($key, $this->scope)) {
+        } elseif (array_key_exists($key, $this->scope)) {
             $result = $this->scope[$key];
-        } elseif (\is_null($default) && $throw) {
-            $message = \sprintf("Missing key '%s'", $key);
-            if (\is_string($throw)) {
+        } elseif (is_null($default) && $throw) {
+            $message = sprintf("Missing key '%s'", $key);
+            if (is_string($throw)) {
                 throw new $throw($message);
             } else {
-                \trigger_error($message, $throw);
+                trigger_error($message, $throw);
             }
         }
 
@@ -144,7 +149,7 @@ class Basic extends RegistryAbstract
         $this->validateKey($key);
         $result = new static($this->get(
             $key,
-            \is_null($options) ? $this->options : $options
+            is_null($options) ? $this->options : $options
         ));
 
         return $result;

@@ -11,6 +11,9 @@ declare(strict_types=1);
 namespace donbidon\Core\Registry\Middleware;
 
 use donbidon\Core\Registry\Registry;
+use function call_user_func;
+use function is_callable;
+use function preg_replace;
 
 /**
  * Registry middleware abstract class.
@@ -29,9 +32,9 @@ abstract class MiddlewareAbstract implements Middleware
      */
     public function process(string $method, Registry $env): void
     {
-        $method = \preg_replace("/^.+::/", "", $method);
-        if ($this->handle && \is_callable([$this, $method])) {
-            \call_user_func([$this, $method], $env);
+        $method = preg_replace("/^.+::/", "", $method);
+        if ($this->handle && is_callable([$this, $method])) {
+            call_user_func([$this, $method], $env);
         }
     }
 
