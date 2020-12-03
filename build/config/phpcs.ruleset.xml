@@ -23,7 +23,10 @@
     <rule ref="Squiz.Commenting.FileComment.Missing" />
     <rule ref="Squiz.Commenting.FunctionComment.Missing" />
     <rule ref="Squiz.Commenting.ClassComment.Missing" />
-    <rule ref="Squiz.Functions.GlobalFunction.Found" />
+
+    <rule ref="Squiz.Functions.GlobalFunction.Found">
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnNewLine" />
+    </rule>
 
     <rule ref="Generic.Formatting.DisallowMultipleStatements.SameLine">
         <exclude-pattern>*/data/*</exclude-pattern>
